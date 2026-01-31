@@ -1,0 +1,494 @@
+DSA
+What is data structure ?
+collection of data values,relationship among them and perform some functions/operations on them 
+
+there is some input and output expexted which will come from the algorithm used 
+there are multiple ways to right algorithm for single operation but we need to see which is more efficient in time and complexity 
+for that we need to know something about +ive and -ive of all the data structures we will see look into it 
+
+First we will learn about need for complexity analysis,time complexity and space complexity 
+Why identify which is better ?
+huge amount of data significant performance difference between solutions have to be considered
+What better mean?
+will have less memory and faster to perform 
+which approach is better ??
+it will be decided on the time complexity and the space complexity
+
+Time Complexity 
+in this we do not actually measure it with in seconds cause there are two main reasons
+same algorithms on same machine may take different time 
+And with different hardware may take different time so instead of it we calculate how many simple  operations computer performs 
+for this we have to see to that when the input increases exponentially the proportion of how much of the operations of the computer increses 
+basically it sees how runtime grows as input size increases and in this we see the general trend and not the precision of operations 
+carried out 
+for this to find we use a graph to analyze it which is asymptotic notations which is big O is standard way to represent it 
+for eg: f(n) = n+3zz
+	then if the number is large enough then the 3 is insignificant and so we can say that it is O(n) and it is linear dependent 
+so bacically we are interested in the properties of the function as n increases
+O(n) or O(n^2) are the notation used to express the asymptotic analysis when n tends to infinity or n becomes very large
+what is big O??
+operations bounded by the multiple of n 
+it is taken as the worst case or the upper bound when the n becomes very large or infinity
+
+Common complexity:
+O(1),O(log n),O(n),O(nlogn),O(n^2),O(2^n),O(n!)  these are some common complexities and the least time complex is from the left and the most time complex is the right most
+
+Big O space complexity
+it is represented in big(O) notation only 
+here space complexity means how much auxiliary memory is needed to run the algorithm (space required for algorithm only ignore the size of input)
+in some solutions we can get better time complexity by using more space 
+some solutions make use of arrays,strings,hashmaps,etc
+number,booleans,null,undefined take up constant space
+
+Techniques to simplify big O notation 
+drop the constant 
+drop the insignificant terms 
+different input parameters
+
+Logarithms
+in coding it is taken as log n to the base 2 always 
+eg: log 16 = 4
+    log 8 = 3
+it is very good time and space complexity 
+when n increases drastically the log n does not show much increase and it is very close to the constant only so is good in complexities
+algo that cuts the input size into half at every step 
+if you double the input size only one operation will increase 
+in some recursion questions the complexity is log n (call stack)
+
+1:Arrays
+they are to be stores each element certain number of memory slots those should be back to back continuous ordered list 
+access and set has space and time complexity of O(1)
+it is a basic operation and same time for large number array 
+eg: arr[3]
+
+traverse/search has time complexity of O(N) as it can go upto last element for searching space complexity O(1) as no extra space is needed for it 
+1. Traversing using a for loop:
+This method iterates through each element of the list.
+Python
+
+my_list = [10, 20, 30, 40, 50]
+
+print("Traversing the list:")
+for element in my_list:
+    print(element)
+
+2. Searching using Linear Search (manual implementation):
+This method iterates through the list and checks each element against the target value.
+Python
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return the index if found
+    return -1  # Return -1 if not found
+
+my_list = [10, 20, 30, 40, 50]
+search_target = 30
+found_index = linear_search(my_list, search_target)
+
+if found_index != -1:
+    print(f"Element {search_target} found at index {found_index}.")
+else:
+    print(f"Element {search_target} not found in the list.")
+
+3. Searching using the in operator:
+This is a concise way to check for the existence of an element.
+Python
+
+my_list = [10, 20, 30, 40, 50]
+search_target = 40
+
+if search_target in my_list:
+    print(f"Element {search_target} is present in the list.")
+else:
+    print(f"Element {search_target} is not present in the list.")
+
+4. Searching using the index() method:
+This method returns the index of the first occurrence of an element. It raises a ValueError if the element is not found. 
+Python
+
+my_list = [10, 20, 30, 40, 50]
+search_target = 20
+
+try:
+    index_of_element = my_list.index(search_target)
+    print(f"Element {search_target} found at index {index_of_element}.")
+except ValueError:
+    print(f"Element {search_target} not found in the list.")
+
+copy has time and space complexity of O(n) as they will need extra space and time needed to copy elements till end of the element 
+1. Shallow Copy:
+A shallow copy creates a new list object, but the elements within the new list are references to the same objects as in the original list. If the elements are immutable (like numbers or strings), this is generally fine. However, if the elements are mutable objects (like other lists), changes to those nested objects in the copy will also affect the original.
+a) Using the copy() method:
+Python
+
+original_list = [1, 2, [3, 4]]
+shallow_copy = original_list.copy()
+
+print(f"Original: {original_list}")
+print(f"Shallow Copy: {shallow_copy}")
+
+# Modifying an immutable element in the shallow copy
+shallow_copy[0] = 99
+print(f"Original after modifying shallow copy (immutable): {original_list}")
+print(f"Shallow Copy after modification: {shallow_copy}")
+
+# Modifying a mutable element (nested list) in the shallow copy
+shallow_copy[2].append(5)
+print(f"Original after modifying shallow copy (mutable): {original_list}")
+print(f"Shallow Copy after modification: {shallow_copy}")
+b) Using the slice operator [:]:
+Python
+
+original_list = [1, 2, [3, 4]]
+shallow_copy_slice = original_list[:]
+
+print(f"Original: {original_list}")
+print(f"Shallow Copy (slice): {shallow_copy_slice}")
+c) Using the list() constructor:
+Python
+
+original_list = [1, 2, [3, 4]]
+shallow_copy_constructor = list(original_list)
+
+print(f"Original: {original_list}")
+print(f"Shallow Copy (constructor): {shallow_copy_constructor}")
+2. Deep Copy:
+A deep copy creates a new list object and recursively creates new copies of all the objects contained within it. This means that changes to nested mutable objects in the deep copy will not affect the original list.
+a) Using copy.deepcopy():
+Python
+
+import copy
+
+original_list = [1, 2, [3, 4]]
+deep_copy = copy.deepcopy(original_list)
+
+print(f"Original: {original_list}")
+print(f"Deep Copy: {deep_copy}")
+
+# Modifying a mutable element (nested list) in the deep copy
+deep_copy[2].append(5)
+print(f"Original after modifying deep copy: {original_list}")
+print(f"Deep Copy after modification: {deep_copy}")
+
+
+insert
+static arrays:c++,java , fixed size ,next memory slot may not be empty 
+dynamic arrays:python,js , allow O(1) insertion at the end , OS allocates almost 2 times as much as memory needed
+
+insertion at beginning time complexity is O(n) as the slot before starting element may or may not be empty
+1. Using the insert() method:
+The insert() method allows you to insert an element at a specific index. To insert at the beginning, you use index 0.
+Python
+
+my_list = [2, 3, 4, 5]
+element_to_insert = 1
+
+my_list.insert(0, element_to_insert)
+
+print(my_list)
+2. Using List Concatenation:
+You can create a new list containing the element to be inserted and then concatenate it with the original list. This creates a new list without modifying the original in-place.
+Python
+
+my_list = [2, 3, 4, 5]
+element_to_insert = 1
+
+my_list = [element_to_insert] + my_list
+
+print(my_list)
+
+insertion at the end in dynamic is always O(1) but for static is O(n) time complexities
+To insert an element at the end of an array (or more commonly, a list) in Python, the append() method is used.
+Python
+
+# Create a list (which acts as a dynamic array in Python)
+my_list = [10, 20, 30, 40]
+print(f"Original list: {my_list}")
+
+# Element to be added
+new_element = 50
+
+# Insert the element at the end using append()
+my_list.append(new_element)
+
+print(f"List after appending {new_element}: {my_list}")
+
+# You can also append another element
+another_element = 60
+my_list.append(another_element)
+print(f"List after appending {another_element}: {my_list}")
+
+insertion somewhere in between time complexity is O(n) 
+To insert an element at a specific position within a Python list (which is commonly used as a dynamic array), the insert() method is utilized. This method takes two arguments: the index at which to insert the element and the element itself.
+Here is an example:
+Python
+
+# Initial list
+my_list = [10, 20, 40, 50]
+
+# Element to insert
+new_element = 30
+
+# Index at which to insert (e.g., at index 2, between 20 and 40)
+insert_index = 2
+
+# Insert the element
+my_list.insert(insert_index, new_element)
+
+# Print the modified list
+print(my_list)
+
+the space complexities for all the insertions is O(1)
+
+remove
+removing at beginning time complexity is O(n)
+at end time complexity is O(1)
+somewhere time complexity O(n)
+all the space complexity are O(1)
+Removing at the Beginning (by index)
+To remove the first element of a list, you can use pop(0) or del with the index 0.
+Python
+
+my_list = [10, 20, 30, 40, 50]
+
+# Using pop()
+removed_element = my_list.pop(0)
+print(f"List after removing first element with pop(): {my_list}")
+print(f"Removed element: {removed_element}")
+
+my_list = [10, 20, 30, 40, 50] # Reset for next example
+
+# Using del
+del my_list[0]
+print(f"List after removing first element with del: {my_list}")
+Removing In Between (by index)
+To remove an element at a specific index within the list, you can use pop() with the index or del with the index.
+Python
+
+my_list = [10, 20, 30, 40, 50]
+
+# Using pop() to remove the element at index 2 (value 30)
+removed_element = my_list.pop(2)
+print(f"List after removing element at index 2 with pop(): {my_list}")
+print(f"Removed element: {removed_element}")
+
+my_list = [10, 20, 30, 40, 50] # Reset for next example
+
+# Using del to remove the element at index 2 (value 30)
+del my_list[2]
+print(f"List after removing element at index 2 with del: {my_list}")
+Removing by Value
+To remove the first occurrence of a specific value from the list, use the remove() method.
+Python
+
+my_list = [10, 20, 30, 20, 40, 50]
+
+# Removing the first occurrence of the value 20
+my_list.remove(20)
+print(f"List after removing the value 20: {my_list}")
+
+# If the value doesn't exist, remove() will raise a ValueError
+# my_list.remove(99) # Uncomment to see ValueError
+Removing a Range of Elements
+To remove a range of elements using slicing with del.
+Python
+
+my_list = [10, 20, 30, 40, 50, 60, 70]
+
+# Removing elements from index 1 (inclusive) to 4 (exclusive)
+del my_list[1:4]
+print(f"List after removing a range of elements: {my_list}")
+ 
+2.Hashtable
+
+What is Hashtable?
+builtin in almost every programming language
+in js it is an object
+in python it is a dictionary
+
+it is a collection of key-value pairs
+keys are unique and immutable
+values can be mutable
+keys are used to access values
+keys can be of any type
+values can be of any type
+they are not necessarily in ordered order they can be unordered not like arrrays
+eg:
+my_dict = {"name": "John", "age": 30, "city": "New York"}
+print(my_dict)  # Output: {'name': 'John', 'age': 30, 'city': 'New York'}
+to access the write my_dict["name"]
+to access the value write my_dict.get("name")
+
+Hashing function 
+it is a function that takes in a key and returns a hash value
+it is used to map keys to values in a hash table
+it is used to find the position of a key in the hash table
+
+Good Hashing Functions
+same input should give same output
+fast to compute
+minimize collisions
+
+operations of hash table
+insert: time and space complexity is O(1)
+for eg:
+Standard Python Dictionary (Hash Table)
+You insert or update items in a Python dictionary using square bracket notation to assign a value to a key: 
+python
+# Create an empty dictionary (hash table)
+my_hashtable = {}
+
+# Insert new key-value pairs
+my_hashtable['apple'] = 10  # Inserts 'apple' with value 10
+my_hashtable['banana'] = 20 # Inserts 'banana' with value 20
+my_hashtable['cherry'] = 30 # Inserts 'cherry' with value 30
+
+# Update an existing value (if the key already exists, its value is overwritten)
+my_hashtable['apple'] = 50  # Updates the value for 'apple' to 50
+
+# Print the dictionary
+print(my_hashtable)
+# Output: {'apple': 50, 'banana': 20, 'cherry': 30} 
+
+search:for keys the time and space complexity is O(1),for values the time and space complexity is O(n)
+
+
+delete: time and space complexity is O(1)
+eg:
+del keyword: This is used to delete a specific key-value pair or the entire dictionary object itself.
+python
+hash_table = {'A': 1, 'B': 2, 'C': 3}
+
+# Delete a specific key-value pair
+del hash_table['B']
+print(hash_table)
+# Output: {'A': 1, 'C': 3}
+
+# To delete the entire dictionary object (be careful, as you cannot use it after)
+# del hash_table 
+
+
+update: time and space complexity is O(1)
+eg:
+Using the Assignment Operator ([])
+This is the most direct way to update an existing key's value. If the key already exists, its value will be overwritten; if it does not exist, a new key-value pair will be added. 
+python
+# Initial dictionary (hash table)
+my_dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
+print(f"Original dictionary: {my_dict}")
+
+# Updating an existing entry
+my_dict['Age'] = 8
+print(f"Updated Age: {my_dict['Age']}")
+
+# Adding a new entry
+my_dict['School'] = "DPS School"
+print(f"New entry added: {my_dict['School']}")
+
+print(f"Dictionary after updates: {my_dict}")
+
+Strings:
+it is data type like boolean,number,etc
+similar to data structures in that we can manipulate them 
+they are stored in way of array of integers i.e each character is a byte
+
+operations on strings:
+read the character in the given index the time and space complexity is O(1) cause it has stored in the form of array of integers
+eg:
+Syntax
+python
+character = my_string[index_number]
+Examples
+Here's how you can access characters using both positive and negative indexing:
+Positive indexing: Starts at 0 for the first character and counts forward.
+Negative indexing: Starts at -1 for the last character and counts backward. 
+python
+# Declare a sample string
+my_string = "Python"
+
+# --- Positive Indexing ---
+# Get the first character (index 0)
+first_char = my_string[0]
+print(f"Character at index 0: {first_char}") # Output: P
+
+# Get the fourth character (index 3)
+fourth_char = my_string[3]
+print(f"Character at index 3: {fourth_char}") # Output: h
+
+# --- Negative Indexing ---
+# Get the last character (index -1)
+last_char = my_string[-1]
+print(f"Character at index -1: {last_char}") # Output: n
+
+# Get the second to last character (index -2)
+second_last_char = my_string[-2]
+print(f"Character at index -2: {second_last_char}") # Output: o
+
+traverse:
+time complexity is O(n) and space Complexity is O(1)
+eg:1. Using a for loop (simplest way)
+A for loop directly iterates over the characters in the string, making the code clean and readable. 
+python
+my_string = "Python"
+
+for char in my_string:
+  print(char)
+Output:
+P
+y
+t
+h
+o
+n
+2. Using for loop with enumerate (to access index and character)
+If you need access to both the character and its corresponding index (position), you can use the enumerate() function. 
+python
+my_string = "Python"
+
+for index, char in enumerate(my_string):
+  print(f"Character at index {index} is {char}")
+Output:
+Character at index 0 is P
+Character at index 1 is y
+Character at index 2 is t
+Character at index 3 is h
+Character at index 4 is o
+Character at index 5 is n
+
+copy:
+time and space complexity is O(n)
+eg:
+String Slicing: Slicing the entire string creates a new string object. This is a common and Pythonic way to force a new object if truly needed.
+python
+str1 = "words"
+str2 = str1[:]
+Using str() constructor: Passing the original string to the built-in str() function returns a new string object with the same value.
+python
+str1 = "words"
+str2 = str(str1)
+
+Concatenation:
+time and space complexity is O(n+m) cause both the strings may have different lengths of the strings
+String Concatenation: Concatenating an empty string to the original also forces the creation of a new string object.
+python
+str1 = "words"
+str2 = str1 + ""
+
+
+Using a loop: You can iterate through the characters of the original string and build a new one character by character, though this is less efficient and generally not recommended.
+python
+str1 = "words"
+str2 = ""
+for char in str1:
+    str2 += char
+
+depending on the language the strings are mutable or immutable
+they are immutable in python
+for that to append the new variable has to be created
+eg:
+python
+str1 = "words"
+str2 = str1 + "!"
+print(str2) # Output: words!
+
