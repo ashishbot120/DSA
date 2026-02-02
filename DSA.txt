@@ -492,3 +492,40 @@ str1 = "words"
 str2 = str1 + "!"
 print(str2) # Output: words!
 
+Binary Search 
+it is a search algorithm that works by repeatedly dividing a sorted array in half, checking if the middle element is the target, and then repeating this process on the half that contains the target.
+it is a divide and conquer algorithm that is efficient for searching ordered data sets.
+it is used when the data set is sorted in both ascending and descending order.
+time complexity is O(logn) and space complexity is O(1)
+eg:
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1
+
+now for recursive approach
+
+def binary_search(arr, target, left, right):
+    if left > right:
+        return -1
+
+    mid = (left + right) // 2
+
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target: 
+        return binary_search(arr, target, mid + 1, right)
+    else:               
+        return binary_search(arr, target, left, mid - 1)    
+        
